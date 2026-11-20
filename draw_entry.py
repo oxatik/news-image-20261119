@@ -59,10 +59,10 @@ def rrect(xy, r, fill=None, outline=None, width=1):
 def hline(y, x0=8, x1=W-8, c=RULE, w=1):
     d.rectangle([x0, y, x1, y + w - 1], fill=c)
 
-def tag(x, y, label, color, h=14):
-    w = tw(label, tSans(True, 8)) + 10
+def tag(x, y, label, color, h=16):
+    w = tw(label, tSans(True, 9)) + 10
     rrect([x, y, x + w, y + h], 3, fill=color)
-    text((x + 5, y + 3), label, tSans(True, 8), (255, 255, 255))
+    text((x + 5, y + 4), label, tSans(True, 9), (255, 255, 255))
     return w
 
 # ---------------------------------------------------------------- header
@@ -90,8 +90,8 @@ for i, (num, lab, col) in enumerate(stats):
     x0 = sx + i * sw
     if i:
         d.rectangle([x0, 122, x0, 152], fill=RULE)
-    text((x0 + 10, 120), num, tSans(True, 20), col)
-    text((x0 + 10, 144), lab, tSans(False, 8), MUTED)
+    text((x0 + 10, 118), num, tSans(True, 22), col)
+    text((x0 + 10, 144), lab, tSans(False, 9), MUTED)
 
 hline(160)
 
@@ -128,8 +128,8 @@ d.rectangle([lx0, ly0, lx0+4, ly1], fill=ASIA)
 tag(lx0+14, ly0+10, "SHENZHEN  ·  SUMMIT", ASIA)
 text((lx1-12, ly0+10), "01", tSans(True, 11), FAINT, anchor="rt")
 
-ay = ly0 + 32
-d.rectangle([lx0+14, ay, lx1-14, ay+118], fill=NAVY)
+ay = ly0 + 30
+d.rectangle([lx0+14, ay, lx1-14, ay+108], fill=NAVY)
 fw, fh = 48, 32
 flag_us(lx0+36,  ay+10, fw, fh)
 flag_cn(lx0+104, ay+8,  fw, fh)
@@ -143,20 +143,20 @@ for i, (a, b) in enumerate(chips):
     text((cx+7, cy+3), a, tSans(True, 8), (255,214,64))
     text((cx+7, cy+12), b, tSans(False, 8), (220,228,240))
 
-lb = ay + 108
+lb = ay + 104
 leader(lx0+70,  lb, (232, 190, 150), (226, 176, 96), (30, 48, 84), (180, 30, 30))
 leader(lx0+150, lb, (226, 178, 128), (24, 20, 16),   (40, 44, 52), (160, 20, 20))
 leader(lx0+230, lb, (228, 196, 168), (168, 148, 120), (36, 40, 48), (150, 24, 24))
 d.rectangle([lx0+40, lb-2, lx0+260, lb+4], fill=(90, 64, 40))
 # names live in the headline; labels under the figures fell outside the navy box
 
-hy = ay + 134
-text((lx0+14, hy), "Trump, Xi and Putin hold first three-way summit", tSans(True, 19), INK)
-body = ("The three presidents met 90 minutes in Shenzhen and signed a four-point “Declaration on Peace” "
-        "on nuclear risk, oil, UN reform and ICC limits. Trump called Putin “my friend.” — Reuters")
-by = hy + 26
-for i, ln in enumerate(wrap(body, tSans(False, 10.5), lx1-lx0-28)):
-    text((lx0+14, by + i*14), ln, tSans(False, 10.5), (52, 46, 40))
+hy = ay + 128
+text((lx0+14, hy), "Trump, Xi and Putin hold first three-way summit", tSans(True, 21), INK)
+body = ("The three presidents signed a four-point “Declaration on Peace” in Shenzhen — "
+        "nuclear risk, oil, UN reform and ICC limits. Trump called Putin “my friend.” — Reuters")
+by = hy + 27
+for i, ln in enumerate(wrap(body, tSans(False, 11.5), lx1-lx0-28)):
+    text((lx0+14, by + i*15), ln, tSans(False, 11.5), (52, 46, 40))
 
 # ---------------------------------------------------------------- lead — ICJ
 rx0, ry0, rx1, ry1 = 630, 168, 1016, 378
@@ -180,12 +180,12 @@ d.line([scx-26, scy+6, scx+26, scy+6], fill=(90, 80, 66), width=2)
 d.ellipse([scx-34, scy+6, scx-14, scy+20], outline=(90, 80, 66), width=2)
 d.ellipse([scx+14, scy+6, scx+34, scy+20], outline=(90, 80, 66), width=2)
 
-text((rx0+14, ry0+148), "World Court: Myanmar committed genocide", tSans(True, 16), INK)
+text((rx0+14, ry0+146), "World Court: Myanmar committed genocide", tSans(True, 18), INK)
 body2 = ("Judges ruled 9–6 that the 2017 Rohingya crackdown was genocide — the first state found "
          "in breach of the 1948 Convention. About 10,000 died; 730,000 fled. — ICJ / AP")
-by2 = ry0 + 170
-for i, ln in enumerate(wrap(body2, tSans(False, 10), rx1-rx0-28)):
-    text((rx0+14, by2 + i*13), ln, tSans(False, 10), (52, 46, 40))
+by2 = ry0 + 172
+for i, ln in enumerate(wrap(body2, tSans(False, 11), rx1-rx0-28)):
+    text((rx0+14, by2 + i*14), ln, tSans(False, 11), (52, 46, 40))
 
 # ---------------------------------------------------------------- icons
 def ic_chart(x, y, w, h, c):
@@ -264,18 +264,18 @@ def story(x0, y0, x1, y1, num, region, color, headline, body, src, icon):
     card(x0, y0, x1, y1)
     d.rectangle([x0, y0, x0+3, y1], fill=color)
     tag(x0+12, y0+8, region, color)
-    text((x1-10, y0+8), num, tSans(True, 10), FAINT, anchor="rt")
-    iz = (x0+12, y0+26, x1-12, y0+96)
+    text((x1-10, y0+8), num, tSans(True, 11), FAINT, anchor="rt")
+    iz = (x0+12, y0+28, x1-12, y0+92)
     d.rectangle([iz[0], iz[1], iz[2], iz[3]], fill=(238, 232, 218))
     icon(iz[0], iz[1], iz[2]-iz[0], iz[3]-iz[1], color)
-    text((x0+12, y0+102), headline, tSans(True, 12.5), INK)
-    yy = y0 + 120
-    for i, ln in enumerate(wrap(body, tSans(False, 9), x1-x0-24)):
-        if yy + 12 > y1 - 16:
+    text((x0+12, y0+98), headline, tSans(True, 14), INK)
+    yy = y0 + 118
+    for i, ln in enumerate(wrap(body, tSans(False, 10.5), x1-x0-24)):
+        if yy + 13 > y1 - 18:
             break
-        text((x0+12, yy), ln, tSans(False, 9), (56, 50, 44))
-        yy += 12
-    text((x0+12, y1-14), src, tSans(False, 8), FAINT)
+        text((x0+12, yy), ln, tSans(False, 10.5), (56, 50, 44))
+        yy += 13
+    text((x0+12, y1-15), src, tSans(False, 9), FAINT)
 
 cw = (W - 16 - 16) / 3
 xs = [8, 8 + cw + 8, 8 + 2*(cw + 8)]
@@ -318,17 +318,17 @@ h3 = gy1c - gy0c
 def story_s(x0, y0, x1, y1, num, region, color, headline, body, src, icon):
     card(x0, y0, x1, y1)
     d.rectangle([x0, y0, x0+3, y1], fill=color)
-    tag(x0+12, y0+7, region, color, h=13)
-    text((x1-10, y0+7), num, tSans(True, 10), FAINT, anchor="rt")
-    icon(x1-80, y0+10, 68, h3-20, color)
-    text((x0+12, y0+26), headline, tSans(True, 12), INK)
-    yy = y0 + 44
-    for i, ln in enumerate(wrap(body, tSans(False, 9), x1-x0-98)):
-        if yy + 11 > y1 - 16:
+    tag(x0+12, y0+7, region, color, h=15)
+    text((x1-10, y0+7), num, tSans(True, 11), FAINT, anchor="rt")
+    icon(x1-84, y0+10, 72, h3-18, color)
+    text((x0+12, y0+28), headline, tSans(True, 13.5), INK)
+    yy = y0 + 48
+    for i, ln in enumerate(wrap(body, tSans(False, 10.5), x1-x0-100)):
+        if yy + 13 > y1 - 18:
             break
-        text((x0+12, yy), ln, tSans(False, 9), (56, 50, 44))
-        yy += 12
-    text((x0+12, y1-13), src, tSans(False, 8), FAINT)
+        text((x0+12, yy), ln, tSans(False, 10.5), (56, 50, 44))
+        yy += 13
+    text((x0+12, y1-14), src, tSans(False, 9), FAINT)
 
 story_s(xs[0], gy0c, xs[0]+cw, gy1c, "09", "ODISHA  ·  STORM", ASIA,
         "Cyclone Akvan nears India",
@@ -347,39 +347,37 @@ story_s(xs[2], gy0c, xs[2]+cw, gy1c, "11", "AUSTRALIA  ·  ECONOMY", OCEANIA,
 
 # ---------------------------------------------------------------- ticker
 hline(886)
-text((8, 894), "ALSO ON THURSDAY 19 NOVEMBER 2026", tSans(True, 9), RED)
+text((8, 892), "ALSO ON THURSDAY 19 NOVEMBER 2026", tSans(True, 10), RED)
 
 tick = [
     ("US",  "Democrats nominate Jeffries for Speaker, 251–11 — first Black nominee.", "AP"),
     ("US",  "Tusk, on Trump and Putin: “God, protect us from such friends.”", "DN"),
-    ("GZA", "Court extends detention of Kamal Adwan director Dr Hussam Abu Safiya.", "UN"),
     ("YEM", "UN relief chief: aid must be allowed into Yemen.", "UN News"),
-    ("IRN", "Study: AI models used in the Iran war flagged civilian sites as targets.", "Vals AI"),
     ("USA", "DHS grilled over the FAA ground-stop that cancelled 18,000 flights.", "C-SPAN"),
+    ("IRN", "Study: AI models used in the Iran war flagged civilian sites as targets.", "Vals AI"),
     ("VEN", "Hegseth: the oil deal makes the Strait of Hormuz “a nonfactor.”", "DN"),
-    ("AI",  "Anthropic’s IPO filings warned of “catastrophic or existential risks.”", "papers"),
 ]
 colw = (W - 16) / 2
 for i, (pl, tx, src) in enumerate(tick):
-    col, row = divmod(i, 4)
+    col, row = divmod(i, 3)
     x = 8 + col * colw
-    y = 912 + row * 16
-    text((x, y), pl, tSans(True, 8), RED)
-    text((x + 30, y), tx, tSans(False, 8.5), INK)
-    text((x + colw - 4, y), src, tSans(False, 8), FAINT, anchor="rt")
+    y = 916 + row * 18
+    text((x, y), pl, tSans(True, 9), RED)
+    text((x + 34, y), tx, tSans(False, 10), INK)
+    text((x + colw - 4, y), src, tSans(False, 9), FAINT, anchor="rt")
 
 hline(972)
 
 # ---------------------------------------------------------------- date check
-d.rectangle([8, 978, W-8, 1006], fill=(22, 60, 40))
-text((18, 983), "DATE CHECK", tSans(True, 11), (140, 230, 160))
-text((100, 983), "Every story happened, or was first reported, on Thursday 19 November 2026 — not 13 November or earlier.",
-     tSans(False, 8.5), (230, 244, 232))
+d.rectangle([8, 974, W-8, 1006], fill=(22, 60, 40))
+text((18, 980), "DATE CHECK", tSans(True, 12), (140, 230, 160))
+text((110, 980), "Every story on this page happened, or was first reported, on Thursday 19 November 2026.",
+     tSans(False, 10), (230, 244, 232))
 
 text((8, 1012), "Not this day: Crimea Bridge 2022/23 · Houthi salvos of Oct/11 Nov · GTA V (2013) · Paris COP21 (2015)",
-     tSans(False, 7.5), MUTED)
+     tSans(False, 8), MUTED)
 text((W-8, 1012), "Drawn in code · Reuters, AP, AFP, WSJ, Al Jazeera, ABC, Kyiv Independent, ICJ, ABS, Rockstar, DN",
-     tSans(False, 7.5), MUTED, anchor="rt")
+     tSans(False, 8), MUTED, anchor="rt")
 
 d.rectangle([0, H-2, W, H], fill=RED)
 
